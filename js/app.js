@@ -35,4 +35,5 @@ function getFacts(e) {
   }
 
   xhr.send();
+  e.preventDefault();
 }
