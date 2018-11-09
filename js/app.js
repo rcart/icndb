@@ -1,5 +1,6 @@
 // Get UI elements
 document.addEventListener('DOMContentLoaded', () => document.getElementById('number').focus());
+document.querySelector('#number').addEventListener('keyup', (e) => e.keyCode === 13 ? getFacts(e) : '');
 document.querySelector('.get-facts').addEventListener('click', getFacts);
 
 function getFacts(e) {
@@ -7,7 +8,7 @@ function getFacts(e) {
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+  xhr.open('GET', `https://api.icndb.com/jokes/random/${number}`, true);
 
   xhr.onload = function() {
     if (this.status === 200) {
@@ -28,11 +29,10 @@ function getFacts(e) {
       document.querySelector('.facts').innerHTML = output;
     } else {
       console.log('Cannot fetch remote');
+      document.querySelector('.facts').innerHTML = this.responseText;
 
     }
   }
 
   xhr.send();
-
-  e.preventDefault();
 }
